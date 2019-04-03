@@ -9,11 +9,22 @@ namespace HelloWorldDempProject
 {
     public class LoggingService
     {
+        private int _currentRowIndex = -1;
+        public string logFile;
+
         public LoggingService()
         { 
             
         }
 
+
+        public void Init()
+        {
+            var path = (string)Environment.GetEnvironmentVariables()["APPDATA"];
+            var folder = Path.Combine(path, "SageAT");
+            Directory.CreateDirectory(folder);
+            logFile = Path.Combine(folder, "Infos.log");
+        }
 
         /// <summary>
         /// Soll einen Eintrag in die Infos.log anhängen.
@@ -25,11 +36,72 @@ namespace HelloWorldDempProject
 
             var folder = Path.Combine(path, "SageAT");
             Directory.CreateDirectory(folder);
-
             var logFile = Path.Combine(folder, "Infos.log");
             using (StreamWriter sw = new StreamWriter(logFile, append: true))
             {
-                sw.WriteLine(toLog);
+                var line = toLog.Replace("_", "");
+                _currentRowIndex++;
+                sw.WriteLine($"{_currentRowIndex} | {toLog}");
+            }
+        }
+
+        public void DeleteLog()
+        {
+            var path = (string)Environment.GetEnvironmentVariables()["APPDATA"];
+
+            var folder = Path.Combine(path, "SageAT");
+            Directory.CreateDirectory(folder);
+
+            var logFile = Path.Combine(folder, "Infos.log");
+
+            using (var sr = new StreamReader(logFile))
+            {
+                var logContent = sr.ReadToEnd();
+                string[] logZeilen = logContent.Split('\n');
+                int i = logZeilen.Count();
+                
+                for(int j=0;j<i; j++)
+                {
+                    var logFile2 = Path.Combine(folder, "Infos1.log");
+                    using (StreamWriter sw2 = new StreamWriter(logFile2, append: true))
+                    {
+                        sw2.WriteLine(logZeilen[j]);
+                    }
+                }
+                if (File.Exists(logFile))
+                    File.Delete(logFile);
+                //File.Replace(logFile, logFile2, logFile2);
+            }
+
+            
+
+        }
+        public void DeleteLine(int rowIndex)
+        {
+            //var path = (string)Environment.GetEnvironmentVariables()["APPDATA"];
+
+            //var folder = Path.Combine(path, "SageAT");
+            
+
+            //var logFile = Path.Combine(folder, "Infos.log");
+
+            using (var sr = new StreamReader(logFile))
+            {
+                var list = new List<string>();
+                while (!sr.EndOfStream)
+                {
+                    list.Add(sr.ReadLine());
+                }
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var istLineToDelete = list[i].StartsWith(i.ToString());
+                    if (istLineToDelete)
+                    {
+                        list.RemoveAt(i);
+                        break;
+                    }
+                }
             }
         }
     }
