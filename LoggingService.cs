@@ -7,8 +7,64 @@ using System.Threading.Tasks;
 
 namespace HelloWorldDempProject
 {
-    public class LoggingService
+    public class LoggingService : ILoggingService, ILoggingServiceInit
     {
+        #region ILoggingService
+
+        /// <summary>
+        /// Soll einen Eintrag in die Infos.log anhängen.
+        /// </summary>
+        /// <param name="toLog">Wird als neue Zeile angehängt.</param>
+        public void Log(string toLog)
+        {
+            //var path = (string)Environment.GetEnvironmentVariables()["APPDATA"];
+
+            //var folder = Path.Combine(path, "SageAT");
+            //Directory.CreateDirectory(folder);
+            //var logFile = Path.Combine(folder, "Infos.log");
+            using (StreamWriter sw = new StreamWriter(logFile, append: true))
+            {
+                var line = toLog.Replace("_", "");
+                _currentRowIndex++;
+                sw.WriteLine($"{_currentRowIndex} | {toLog}");
+            }
+        }
+
+        public void DeleteLine(int rowIndex)
+        {
+
+            using (var sr = new StreamReader(logFile))
+            {
+                var list = new List<string>();
+                while (!sr.EndOfStream)
+                {
+                    list.Add(sr.ReadLine());
+                }
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var istLineToDelete = list[i].StartsWith(i.ToString());
+                    if (istLineToDelete)
+                    {
+                        list.RemoveAt(i);
+                        break;
+                    }
+                }
+                //TODO list in Datei zurückschreiben
+                using (var sw = new StreamWriter(logFile))
+                {
+                    for (int i = 0; i < list.Count(); i++)
+                    {
+                        // sw.WriteLine(list[i]);
+                    }
+                }
+            }
+
+        }
+
+
+        #endregion
+
         private int _currentRowIndex = -1;
         public string logFile;
 
@@ -17,7 +73,7 @@ namespace HelloWorldDempProject
             
         }
 
-
+        #region ILoggingServiceInit
         public void Init()
         {
             var path = (string)Environment.GetEnvironmentVariables()["APPDATA"];
@@ -25,25 +81,8 @@ namespace HelloWorldDempProject
             Directory.CreateDirectory(folder);
             logFile = Path.Combine(folder, "Infos.log");
         }
+        #endregion
 
-        /// <summary>
-        /// Soll einen Eintrag in die Infos.log anhängen.
-        /// </summary>
-        /// <param name="toLog">Wird als neue Zeile angehängt.</param>
-        public void Log(string toLog)
-        {
-            var path = (string)Environment.GetEnvironmentVariables()["APPDATA"];
-
-            var folder = Path.Combine(path, "SageAT");
-            Directory.CreateDirectory(folder);
-            var logFile = Path.Combine(folder, "Infos.log");
-            using (StreamWriter sw = new StreamWriter(logFile, append: true))
-            {
-                var line = toLog.Replace("_", "");
-                _currentRowIndex++;
-                sw.WriteLine($"{_currentRowIndex} | {toLog}");
-            }
-        }
 
         public void DeleteLog()
         {
@@ -76,33 +115,8 @@ namespace HelloWorldDempProject
             
 
         }
-        public void DeleteLine(int rowIndex)
-        {
-            //var path = (string)Environment.GetEnvironmentVariables()["APPDATA"];
 
-            //var folder = Path.Combine(path, "SageAT");
-            
 
-            //var logFile = Path.Combine(folder, "Infos.log");
-
-            using (var sr = new StreamReader(logFile))
-            {
-                var list = new List<string>();
-                while (!sr.EndOfStream)
-                {
-                    list.Add(sr.ReadLine());
-                }
-
-                for (int i = 0; i < list.Count; i++)
-                {
-                    var istLineToDelete = list[i].StartsWith(i.ToString());
-                    if (istLineToDelete)
-                    {
-                        list.RemoveAt(i);
-                        break;
-                    }
-                }
-            }
-        }
+        
     }
 }
