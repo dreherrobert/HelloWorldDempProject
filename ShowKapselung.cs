@@ -33,13 +33,13 @@ namespace HelloWorldDempProject
         public Child()
         {
             ParentMethodA();
-            ParentMethodC();
+            //ParentMethodC();
         }
 
-        public override void ParentMethodC()
-        {
-            throw new NotImplementedException();
-        }
+        //public override void ParentMethodC()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 
     public class Parent
@@ -48,7 +48,7 @@ namespace HelloWorldDempProject
 
         private void ParentMethodB() { }
 
-        public abstract void ParentMethodC();
+        //public abstract void ParentMethodC();
         
         virtual public void ParentMethodD()
         {
