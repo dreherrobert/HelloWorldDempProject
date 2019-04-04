@@ -9,6 +9,9 @@ namespace HelloWorldDempProject
 {
     public class LoggingService : ILoggingService, ILoggingServiceInit
     {
+        private int _currentRowIndex = -1;
+        public string logFile;
+
         #region ILoggingService
 
         /// <summary>
@@ -65,14 +68,6 @@ namespace HelloWorldDempProject
 
         #endregion
 
-        private int _currentRowIndex = -1;
-        public string logFile;
-
-        public LoggingService()
-        { 
-            
-        }
-
         #region ILoggingServiceInit
         public void Init()
         {
@@ -83,6 +78,10 @@ namespace HelloWorldDempProject
         }
         #endregion
 
+        public LoggingService()
+        {
+
+        }
 
         public void DeleteLog()
         {
@@ -115,8 +114,6 @@ namespace HelloWorldDempProject
             
 
         }
-
-
         
     }
 }

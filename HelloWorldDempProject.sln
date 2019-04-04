@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldDempProject", "He
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "..\UnitTest\UnitTest.csproj", "{337F5E54-8C1D-4EFF-AB94-33F6FF86BA3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoAPFSageSchulung", "..\DemoAPFSageSchulung\DemoAPFSageSchulung.csproj", "{02D5EB73-BD5A-442A-922A-92E77FFDE225}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoAPFSageSchulung", "DemoAPFSageSchulung\DemoAPFSageSchulung.csproj", "{02D5EB73-BD5A-442A-922A-92E77FFDE225}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

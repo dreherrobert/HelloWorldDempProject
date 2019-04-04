@@ -1,0 +1,35 @@
+﻿<Window x:Class="DemoAPFSageSchulung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoAPFSageSchulung"
+        mc:Ignorable="d"
+        Title="Demo WPF Sage Schulung" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="40"/>
+            <RowDefinition />
+            <RowDefinition Height ="40"/>
+            <RowDefinition/>
+            
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1">
+            <Button Content="Drück mich!" 
+                Grid.Row="1"
+                Height="40"
+                Width="100"
+                Tag="Log"
+                Click="Button_Click"
+                Background="LightGreen"/>
+            <Button Content="2. Knopf" 
+                Grid.Row="1"
+                Height="40"
+                Width="100"
+                Tag="DeleteLog"
+                Click="Button_Click"
+                Background="LightGray"/>
+               
+        </StackPanel>
+    </Grid>
+</Window>
