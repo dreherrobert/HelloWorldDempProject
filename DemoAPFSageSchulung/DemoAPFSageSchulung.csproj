@@ -100,6 +100,10 @@
       <Project>{7dbbe8e8-ceae-44ee-8b84-9891a4f7d9e6}</Project>
       <Name>HelloWorldDempProject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharedTypes\SharedTypes.csproj">
+      <Project>{8801342f-ad45-4ad5-806a-093436e4e825}</Project>
+      <Name>SharedTypes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

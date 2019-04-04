@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedTypes;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,8 +10,10 @@ namespace HelloWorldDempProject
 {
     public class LoggingService : ILoggingService, ILoggingServiceInit
     {
+        #region private Fields
         private int _currentRowIndex = -1;
         public string logFile;
+        #endregion
 
         #region ILoggingService
 
@@ -30,6 +33,27 @@ namespace HelloWorldDempProject
                 var line = toLog.Replace("_", "");
                 _currentRowIndex++;
                 sw.WriteLine($"{_currentRowIndex} | {toLog}");
+            }
+        }
+
+        public void Log(LogLineModel toLog)
+        {
+            //string logMessageZeile = string.Empty;
+
+
+            //using (StreamWriter sw = new StreamWriter(logFile, append: true))
+            //{
+            //    var line = logMessageZeile.Replace("_", "");
+            //    _currentRowIndex++;
+            //    logMessageZeile = $"{_currentRowIndex} | {toLog.LoggingTime.ToString() } | { toLog.Message}";
+            //    sw.WriteLine(logMessageZeile);
+            //}
+
+            using (StreamWriter sw = new StreamWriter(logFile, append: true))
+            {
+                _currentRowIndex++;
+                var line = _Mapper(toLog);
+                sw.WriteLine(line);
             }
         }
 
@@ -78,6 +102,22 @@ namespace HelloWorldDempProject
             logFile = Path.Combine(folder, "Infos.log");
         }
         #endregion
+
+        #region private Methods
+
+        private StringBuilder _Mapper(LogLineModel logLineModel)
+        {
+            var sb = new StringBuilder();
+            sb.Append(logLineModel.RowIndex);
+            sb.Append(" | ");
+            sb.Append(logLineModel.LoggingTime);
+            sb.Append(" | ");
+            sb.Append(logLineModel.Message);
+
+            return sb;
+        }
+
+        #endregion private Methods
 
         public LoggingService()
         {

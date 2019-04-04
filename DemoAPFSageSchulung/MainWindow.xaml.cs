@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HelloWorldDempProject;
+using SharedTypes;
 
 namespace DemoAPFSageSchulung
 {
@@ -23,12 +24,13 @@ namespace DemoAPFSageSchulung
     {
         private readonly ILoggingService _logger;
         private readonly ILoggingServiceInit _initService;
+
         public MainWindow()
         {
             InitializeComponent();
             var service = new LoggingService();
-            _initService = service;
-            _logger = service;
+            _initService = (ILoggingServiceInit)service;
+            _logger = (ILoggingService)service;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
