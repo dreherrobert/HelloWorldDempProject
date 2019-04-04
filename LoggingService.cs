@@ -47,7 +47,7 @@ namespace HelloWorldDempProject
 
                 for (int i = 0; i < list.Count; i++)
                 {
-                    var istLineToDelete = list[i].StartsWith(i.ToString());
+                    var istLineToDelete = list[i].StartsWith(rowIndex.ToString());
                     if (istLineToDelete)
                     {
                         list.RemoveAt(i);
