@@ -49,7 +49,8 @@ namespace DemoAPFSageSchulung
                             break;
 
                         case "DeleteLog":
-
+                            _initService.Init();
+                            _logger.DeleteLine(3);
                             break;
 
                         default:

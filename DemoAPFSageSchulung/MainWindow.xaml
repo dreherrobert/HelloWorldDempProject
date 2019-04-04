@@ -15,20 +15,20 @@
             
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1">
-            <Button Content="Drück mich!" 
+            <Button Content="Log schreiben!" 
                 Grid.Row="1"
                 Height="40"
                 Width="100"
                 Tag="Log"
                 Click="Button_Click"
                 Background="LightGreen"/>
-            <Button Content="2. Knopf" 
+            <Button Content="Log löschen!" 
                 Grid.Row="1"
                 Height="40"
                 Width="100"
                 Tag="DeleteLog"
                 Click="Button_Click"
-                Background="LightGray"/>
+                Background="LightBlue"/>
                
         </StackPanel>
     </Grid>

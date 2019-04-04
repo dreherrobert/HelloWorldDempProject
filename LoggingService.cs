@@ -43,6 +43,7 @@ namespace HelloWorldDempProject
                 {
                     list.Add(sr.ReadLine());
                 }
+                sr.Close();
 
                 for (int i = 0; i < list.Count; i++)
                 {
@@ -58,7 +59,7 @@ namespace HelloWorldDempProject
                 {
                     for (int i = 0; i < list.Count(); i++)
                     {
-                        // sw.WriteLine(list[i]);
+                         sw.WriteLine(list[i]);
                     }
                 }
             }
